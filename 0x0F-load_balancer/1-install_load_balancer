@@ -3,7 +3,6 @@
 sudo apt-get -y update
 sudo apt-get install -y haproxy
 
-# Configure HAProxy
 sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOT
 global
     daemon
@@ -25,11 +24,8 @@ backend http_back
     server 244284-web-02 52.206.217.175:80 check
 EOT
 
-# Test HAProxy configuration
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 
-# Start HAProxy
 sudo systemctl start haproxy
 
-# Enable HAProxy to start on boot
 sudo systemctl enable haproxy
