@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Update the package list
+# Setup HAProxy
 sudo apt-get -y update
-# Install HAProxy version 1.8
 sudo apt-get install -y haproxy
 
 # Configure HAProxy
