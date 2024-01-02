@@ -4,6 +4,7 @@ import requests
 import json
 import sys
 
+
 def export_to_json(employee_id):
     # API base URL
     url = "https://jsonplaceholder.typicode.com/"
@@ -21,6 +22,7 @@ def export_to_json(employee_id):
     filename = "{}.json".format(employee_id)
     with open(filename, 'w') as jsonfile:
         json.dump(data, jsonfile)
+
 
 # Example usage:
 if __name__ == "__main__":
