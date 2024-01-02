@@ -3,6 +3,7 @@
 import requests
 import sys
 
+
 def get_employee_todo_progress(employee_id):
     # API base URL
     url = "https://jsonplaceholder.typicode.com/"
@@ -14,14 +15,15 @@ def get_employee_todo_progress(employee_id):
     todos = requests.get(url + "todos", params={"userId": employee_id}).json()
 
     # Extract completed tasks
-    completed_tasks = [task.get("title") for task in todos if task.get("completed")]
+    completed = [task.get("title") for task in todos if task.get("completed")]
 
     # Display output
     print("Employee {} is done with tasks({}/{}):".format(
-        user.get("name"), len(completed_tasks), len(todos)))
+        user.get("name"), len(completed), len(todos)))
 
     # Display titles of completed tasks
-    [print("\t{}".format(task)) for task in completed_tasks]
+    [print("\t{}".format(task)) for task in completed]
+
 
 # Example usage:
 if __name__ == "__main__":
