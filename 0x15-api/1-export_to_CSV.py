@@ -31,5 +31,6 @@ if __name__ == "__main__":
         writer.writerow(["User ID", "Username", "Completed", "Title"])
 
         # Write rows for each task
-        [writer.writerow([user_id, username, t.get("completed"), t.get("title")])
-         for t in todos]
+        [writer.writerow(
+		[user_id, username, t.get("completed"), t.get("title")])
+		for t in todos]
