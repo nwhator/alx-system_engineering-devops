@@ -22,8 +22,11 @@ if __name__ == "__main__":
     # Retrieve TODO list for the given employee ID
     todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
+    # Define CSV file name
+    csv_file_name = "{}.csv".format(user_id)
+
     # Export to CSV file
-    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
+    with open(csv_file_name, "w", newline="") as csvfile:
         # Create CSV writer
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
 
