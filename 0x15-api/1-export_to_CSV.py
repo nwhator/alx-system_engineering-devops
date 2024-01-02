@@ -37,3 +37,4 @@ if __name__ == "__main__":
         [writer.writerow(
             [user_id, username, t.get("completed"), t.get("title")]
          ) for t in todos]
+
