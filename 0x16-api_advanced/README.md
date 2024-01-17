@@ -4,7 +4,7 @@
 
 ## Overview 🌐
 
-Embark on an exciting journey into the realm of advanced API manipulation! 🧑‍💻 This project is your ticket to mastering the intricacies of API interactions, with a focus on the dynamic world of the Reddit API. 🚀 Uncover the magic of navigating documentation, conquering pagination challenges, and wielding the power of JSON parsing and recursive calls.
+Embark on an exciting journey into the realm of advanced API manipulation! 🧑 This project is your ticket to mastering the intricacies of API interactions, with a focus on the dynamic world of the Reddit API. 🚀 Uncover the magic of navigating documentation, conquering pagination challenges, and wielding the power of JSON parsing and recursive calls.
 
 ## Prerequisites 🛠️
 
