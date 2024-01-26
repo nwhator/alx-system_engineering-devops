@@ -9,7 +9,7 @@ User=ubuntu
 # Set working directory
 WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
 # Start Gunicorn with 3 workers, binfing to 0.0.0.0:5003, log excess to /tmp/airbnb-error.log
-ExecStart=gunicorn --workers 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app --error-logfile /tmp/airbnb-access.log
+ExecStart=gunicorn --workers 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app --error-logfile /tmp/airbnb-error.log
 # Restart the service if it fails
 Restart=always
 # Redirect standard output to syslog
