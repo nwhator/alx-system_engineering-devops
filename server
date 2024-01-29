@@ -1,0 +1,159 @@
+#!/usr/bin/env bash
+
+# Server addresses (change these to your actual addresses)
+server1="Web 01 IP addeess"
+server2="Web 02 IP address"
+load_balancer="Loqd balancer IP address"
+
+# Ensure to ask for new server after creating SSH keys
+# Code to create SSH public keys within 0x0B directory
+
+# coloring
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+YELLOW="\033[1;33m"
+MAGENTA="\033[1;35m"
+CYAN="\033[1;36m"
+BLUE="\033[1;34m"
+NC="\033[0m"
+
+# printing function
+cprint() {
+  local color=$1
+  local text=$2
+  local NC='\033[0m'
+  echo -e "${color}${text}${NC}"
+}
+
+
+cprint "$GREEN" "[+] Good Day, What server you would like to connect to?: "
+
+# check the if the op is done well
+check_op_web_01_and_web_02_lb ()
+{
+  if [ $? -eq 0 ]; then
+    cprint "$GREEN" "[+]Have a Nice Day\n"
+  else
+    cprint "$RED" "[+]Something went wrong check your connection or try again\n"
+  fi
+}
+
+# function to connect to web-01 and web-02 and load balancer
+connect_to_web_01 ()
+{
+    cprint "$GREEN" "[+]Connecting to web-01..."
+    ssh ubuntu@$server1
+}
+
+connect_to_web_02 ()
+{
+    cprint "$GREEN" "[+]Connecting to web-02..."
+    ssh ubuntu@$server2
+}
+
+connect_to_lb () {
+    cprint "$GREEN" "[+]Connecting to bl-01..."
+    ssh ubuntu@$load_balancer
+}
+
+
+# function to transfer the files to web-01 and web-02 and load balancer
+transfer_to_web_01 ()
+{
+    cprint "$GREEN" "[+]Transferring files to web-01..."
+    cprint "${MAGENTA}""[?] Enter the names of the files to transfer (space-separated): "
+    read -rea files
+
+    for file in "${files[@]}"; do
+        scp -i ~/.ssh/school -o StrictHostKeyChecking=no "$file" ubuntu@$server1:~/
+    done
+}
+
+transfer_to_web_02 ()
+{
+    cprint "$GREEN" "[+]Transferring files to web-02..."
+    cprint "${MAGENTA}""[?] Enter the names of the files to transfer (space-separated): "
+    read -rea files
+
+    for file in "${files[@]}"; do
+        scp -i ~/.ssh/school -o StrictHostKeyChecking=no "$file" ubuntu@$server2:~/
+    done
+}
+
+transfer_to_lb_01 ()
+{
+    cprint "$GREEN" "[+]Transferring files to web-02..."
+    cprint "${MAGENTA}""[?] Enter the names of the files to transfer (space-separated): "
+    read -rea files
+
+    for file in "${files[@]}"; do
+        scp -i ~/.ssh/school -o StrictHostKeyChecking=no "$file" ubuntu@$load_balancer:~/
+    done
+}
+
+exit_func ()
+{
+    cprint "$RED" "[+]Exiting the script..."
+    cprint "$CYAN" "[+]Have a Nice Day cleaning your terminal in 2s..."
+    sleep 2
+    clear
+    exit 0
+}
+print_msg()
+{
+
+    cprint "$MAGENTA" "---> This is a script that automates connection and transfer of the files to your server <---\n"
+    cprint "$BLUE" "[?]Choose the operation to perform: \n"
+    cprint "$YELLOW" "========== connect to web-01 -> 1 ===============\n"
+    cprint "$YELLOW" "========== connect to web-02 -> 2 ==========\n"
+    cprint "$YELLOW" "========== connect to load balancer -> 3 ============\n"
+    cprint "$YELLOW" "========== transfer files to web-01 -> 4 ============\n"
+    cprint "$YELLOW" "========== transfer files to web-02 -> 5 ============\n"
+    cprint "$YELLOW" "========== transfer files to load balancer -> 6 ============\n"
+    cprint "$YELLOW" "==========Exit -> 7 ======================\n"
+    cprint "$GREEN" "[?]Enter the number: "
+}
+
+
+loop=true
+
+while $loop; do
+print_msg
+read  -rn 1 input
+echo
+
+case $input in
+  1)
+    connect_to_web_01
+    check_op_web_01_and_web_02_lb
+    ;;
+  2)
+    connect_to_web_02
+    check_op_web_01_and_web_02_lb
+    ;;
+  3)
+    connect_to_lb
+    check_op_web_01_and_web_02_lb
+    ;;
+  4)
+    transfer_to_web_01
+    check_op_web_01_and_web_02_lb
+    ;;
+  5)
+    transfer_to_web_02
+    check_op_web_01_and_web_02_lb
+    ;;
+  6)
+    transfer_to_lb_01
+    check_op_web_01_and_web_02_lb
+    ;;
+  7)
+    exit_func
+    ;;
+  *)
+    cprint "$RED" "[-]Wrong input\n"
+    exit 2
+    ;;
+esac
+check_op_web_01_and_web_02_lb
+done
