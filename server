@@ -6,7 +6,6 @@ server2="Web 02 IP address"
 load_balancer="Loqd balancer IP address"
 
 # Ensure to ask for new server after creating SSH keys
-# Code to create SSH public keys within 0x0B directory
 
 # coloring
 RED="\033[1;31m"
