@@ -5,7 +5,8 @@ server1="Web 01 IP addeess"
 server2="Web 02 IP address"
 load_balancer="Loqd balancer IP address"
 
-# Ensure to ask for new server after creating SSH keys
+# Asj for new IP address after creating SSH
+# Ensure to ask for new server after creating SSH keys visit 0x0B
 
 # coloring
 RED="\033[1;31m"
