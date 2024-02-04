@@ -6,7 +6,7 @@ This repository contains code and documentation related to the ALX System Engine
 
 ## Getting Started
 
-Clone the repository to your local machine:
+Clone the repository:
 
 ```bash
 git clone https://github.com/nwhator/alx-system_engineering-devops.git
